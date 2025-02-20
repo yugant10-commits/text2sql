@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirlineSQL - Natural Language SQL Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    <link href="/static/styles1.css" rel="stylesheet">
+    <script src="/static/script.js" defer></script>
+</head>
+<body class="dark:bg-gray-800">
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <button class="new-chat-btn">
+                    <span class="material-icons-round">add</span>
+                    <span>New Chat</span>
+                </button>
+            </div>
+            
+            <div class="sidebar-content">
+                <div class="chat-history">
+                    <div class="history-header">
+                        <h3>Recent Conversations</h3>
+                        <button class="clear-history">
+                            <span class="material-icons-round">delete_outline</span>
+                        </button>
+                    </div>
+                    <ul class="chat-list">
+                        <li class="active">
+                            <span class="material-icons-round">chat</span>
+                            <div class="chat-info">
+                                <span class="chat-title">Flight Schedule Query</span>
+                                <span class="chat-time">2 min ago</span>
+                            </div>
+                        </li>
+                        <!-- Add more chat history items here -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="app-info">
+                    <h4>About AirlineSQL</h4>
+                    <p>Natural language to SQL query converter for airline database analysis.</p>
+                    <div class="version-info">
+                        <span class="version">Version 1.0</span>
+                        <span class="build">Build 2025.02</span>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <img src="/static/images/user.jpeg" alt="User" class="user-avatar">
+                    <div class="user-details">
+                        <span class="user-name">Yugant Ghimire</span>
+                        <span class="user-role">Developer</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-left">
+                    <h1>AirlineSQL Assistant</h1>
+                    <span class="status-indicator">
+                        <span class="status-dot"></span>
+                        Ready
+                    </span>
+                </div>
+                <div class="header-actions">
+                    <button class="action-btn" title="Clear conversation">
+                        <span class="material-icons-round">clear_all</span>
+                    </button>
+                    <button class="action-btn" title="Settings">
+                        <span class="material-icons-round">settings</span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="content-container">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+</body>
+</html>

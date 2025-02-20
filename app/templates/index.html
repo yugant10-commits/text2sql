@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="chat-container">
+    <div class="chat-messages" id="chat-messages">
+        <div class="message system-message welcome-message">
+            <div class="message-avatar">
+                <img src="/static/images/bot-avatar.jpeg" alt="AirlineSQL" width="36" height="36">
+            </div>
+            <div class="message-content">
+                <div class="message-text">
+                    <h1>Welcome to AirlineSQL!</h1>
+                    <p>I can help you query the airline database using natural language.</p>
+                    <div class="example-queries">
+                        <p>Try asking:</p>
+                        <ul>
+                            <li>"Show me all flights from New York to London"</li>
+                            <li>"What's the average delay time for each airline?"</li>
+                            <li>"List the top 5 busiest airports by number of flights"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="messages-container">
+            <!-- Messages will be loaded here -->
+        </div>
+    </div>
+    
+    <div class="chat-input-container">
+        <form id="query-form"
+              hx-post="/query" 
+              hx-trigger="submit"
+              hx-target="#messages-container" 
+              hx-swap="beforeend"
+              class="input-form"
+              hx-headers='{"Accept": "text/event-stream"}'>
+            <div class="input-box">
+                <input type="text" 
+                       id="query" 
+                       name="query" 
+                       placeholder="Message AirlineSQL..." 
+                       required
+                       autocomplete="off"
+                       aria-label="Type your question">
+                <button type="submit" class="send-btn" aria-label="Send message">
+                    <i class="material-icons">send</i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.body.addEventListener('htmx:beforeRequest', function(evt) {
+    const form = evt.detail.elt;
+    const input = form.querySelector('input[name="query"]');
+    const query = input.value;
+    
+    // Clear input immediately
+    input.value = '';
+    
+    // Add user message
+    const messagesContainer = document.querySelector('#messages-container');
+    const userMessage = `
+        <div class="message user-message animate-message">
+            <div class="message-avatar">
+                <img src="/static/images/user-avatar.svg" alt="User" width="36" height="36">
+            </div>
+            <div class="message-content">
+                <p>${query}</p>
+            </div>
+        </div>
+    `;
+    messagesContainer.insertAdjacentHTML('beforeend', userMessage);
+    
+    // Scroll to bottom
+    const chatMessages = document.querySelector('.chat-messages');
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+});
+
+// Handle streaming responses
+document.body.addEventListener('htmx:afterOnLoad', function(evt) {
+    if (evt.detail.xhr.getResponseHeader("Content-Type") === "text/event-stream") {
+        const lines = evt.detail.xhr.response.split("\n\n");
+        lines.forEach(line => {
+            if (line.trim()) {  // Only process non-empty lines
+                const messagesContainer = document.querySelector('#messages-container');
+                messagesContainer.insertAdjacentHTML('beforeend', line);
+                
+                // Scroll to bottom
+                const chatMessages = document.querySelector('.chat-messages');
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        });
+    }
+});
+</script>
+{% endblock %}
