@@ -2,6 +2,10 @@
 
 A FastAPI-based web application that converts natural language questions into SQL queries for airline database analysis, powered by OpenAI's GPT-4o-mini.
 
+## UI
+![alt text](images/image.png)
+
+
 ## Features
 
 - 🗣️ Natural language to SQL conversion
@@ -61,10 +65,6 @@ source venv/bin/activate
 pip install -r requirements.txt
 python main.py
 ```
-
-## UI
-![alt text](images/image.png)
-
 
 
 ## Author
