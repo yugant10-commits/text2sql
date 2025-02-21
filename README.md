@@ -2,9 +2,10 @@
 
 A FastAPI-based web application that converts natural language questions into SQL queries for airline database analysis, powered by OpenAI's GPT-4o-mini.
 
-## UI
+## User Interface
 ![alt text](images/image.png)
 
+## System Architecture
 ![alt text](images/cosmofoil_architecture.png)
 
 ## Features
