@@ -62,6 +62,8 @@ pip install -r requirements.txt
 python main.py
 ```
 
+## UI
+![alt text](images/image.png)
 
 
 
