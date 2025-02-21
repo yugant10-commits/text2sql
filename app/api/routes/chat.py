@@ -30,7 +30,6 @@ async def process_query(
                     "json_output": json_output,
                 }
             ).body.decode() + "\n\n"
-            await asyncio.sleep(0.5)
 
             # Step 2: SQL Generation
             sql_query = await openai_service.process_second_call(json_output)
@@ -42,7 +41,6 @@ async def process_query(
                     "sql_query": sql_query,
                 }
             ).body.decode() + "\n\n"
-            await asyncio.sleep(0.5)
 
             # Step 3: Query Execution
             columns, results = await sql_service.execute_query(sql_query)

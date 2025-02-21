@@ -9,6 +9,18 @@
     <script src="https://unpkg.com/htmx.org@1.9.6"></script>
     <link href="/static/styles1.css" rel="stylesheet">
     <script src="/static/script.js" defer></script>
+    <style>
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: calc(100% - var(--sidebar-width)); /* Adjusted to span across the entire screen */
+            position: fixed;
+            top: 0;
+            left: var(--sidebar-width); /* Start after the sidebar */
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body class="dark:bg-gray-800">
     <div class="app-container">
