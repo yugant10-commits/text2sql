@@ -5,6 +5,7 @@ A FastAPI-based web application that converts natural language questions into SQ
 ## UI
 ![alt text](images/image.png)
 
+![alt text](images/cosmofoil_architecture.png)
 
 ## Features
 
